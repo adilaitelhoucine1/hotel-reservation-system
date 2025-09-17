@@ -1,3 +1,5 @@
+package src.domain;
+
 import java.util.UUID;
 public class Client {
      private UUID id;
@@ -23,4 +25,6 @@ public class Client {
       public String getPassword(){
         return this.password;
       }
+
+
 }

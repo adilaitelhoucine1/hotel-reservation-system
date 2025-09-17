@@ -1,3 +1,5 @@
+package src.domain;
+
 public class Hotel {
    private String hotelId;
    private String name;
@@ -28,4 +30,7 @@ public Double getRating(){
     return this.rating;
 }
 
+    public static class AuthService {
+
+    }
 }
