@@ -85,12 +85,13 @@ public class Main {
                     switch (choice) {
                         case 1 -> hotelService.listHotels();
                         case 2 -> reservationService.bookRoom(sc, currentUser);
-//                        case 3 -> reservationService.cancelReservation(sc, currentUser);
-//                        case 4 -> reservationService.showHistory(currentUser);
+                        case 3 -> reservationService.cancelReservation(sc, currentUser);
+                        case 4 -> reservationService.showHistory(currentUser);
                         case 5 -> authService.logout();
                         case 0 -> running = false;
-                        default -> System.out.println("❌ Invalid choice!");
+                        default -> System.out.println(" Invalid choice!");
                     }
+
                 }
             }
         }

@@ -6,6 +6,9 @@ import src.domain.Reservation;
 import src.repository.HotelRepository;
 import src.repository.ReservationRepository;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ReservationService {
@@ -35,4 +38,43 @@ public class ReservationService {
         }
 
     }
+
+   public void  cancelReservation(Scanner sc, Client currentUser){
+       System.out.println("Entrer Id de reservaion ");
+       String reservationId=sc.nextLine();
+       reservation=reservationRepository.getReservation(reservationId);
+       if(!reservation.getClientId().equals(currentUser.getID())){
+           System.out.println("c est pas votre reservation");
+       }else{
+           reservationRepository.remove(reservation);
+           hotel =hotelRepository.FindById(reservation.getHotelId());
+           hotel.setavAilableRooms(hotel.getAvailableRooms()+1);
+       }
+    }
+
+    public void showHistory(Client currentUser) {
+        List<Reservation> reservations = reservationRepository.getAllreservations();
+
+        System.out.println("\n=== Historique des Réservations ===");
+
+        for (Reservation r : reservations) {
+            // Optionally filter only the logged-in user's reservations
+            if (!r.getClientId().equals(currentUser.getID())) {
+                continue;
+            }
+
+            Hotel hotel = hotelRepository.FindById(r.getHotelId());
+            String hotelName = (hotel != null) ? hotel.getName() : "Unknown Hotel";
+
+            String clientName = currentUser.getFullName();
+
+            System.out.println("---------------------------------------------------");
+            System.out.println("Reservation ID : " + r.getId());
+            System.out.println("Client         : " + clientName);
+            System.out.println("Hotel          : " + hotelName);
+            System.out.println("Nuits          : " + r.getNights());
+            System.out.println("Date           : " + r.getTimestamp());
+        }
+    }
+
 }

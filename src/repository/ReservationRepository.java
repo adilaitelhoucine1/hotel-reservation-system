@@ -32,7 +32,16 @@ public class ReservationRepository {
         return result;
     }
 
-    public List<Reservation> findAll() {
+    public List<Reservation> getAllreservations() {
         return Reservations;
+    }
+
+    public Reservation getReservation(String  reservationid){
+        for(Reservation reservation : Reservations){
+            if(reservation.getId().equals(reservationid)){
+                return reservation;
+            }
+        }
+        return null;
     }
  }

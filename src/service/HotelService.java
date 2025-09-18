@@ -3,7 +3,7 @@ package src.service;
 import src.domain.Client;
 import src.domain.Hotel;
 import src.repository.HotelRepository;
-import src.service.AuthService;
+
 import java.util.List;
 import java.util.Scanner;
 
