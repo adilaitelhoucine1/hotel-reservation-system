@@ -11,6 +11,13 @@ public class HotelService {
     private HotelRepository  hotelRepository= new HotelRepository() ;
     private Hotel hotel;
 
+    public HotelService(HotelRepository hotelRepository) {
+        this.hotelRepository = hotelRepository;
+    }
+
+
+
+
     public void listHotels(){
         List<Hotel> hotels=hotelRepository.getAllHotels();
         System.out.println("\n=== Liste des Hôtels ===");
@@ -38,24 +45,24 @@ public class HotelService {
 
         System.out.println(currentUser.getFullName());
 
-//        System.out.println("\n=== Création d'un nouvel Hôtel ===");
-//
-//        System.out.print("Entrer l'ID de l'hôtel : ");
-//        String hotelId = sc.nextLine();
-//
-//        System.out.print("Entrer le nom de l'hôtel : ");
-//        String name = sc.nextLine();
-//
-//        System.out.print("Entrer l'adresse de l'hôtel : ");
-//        String address = sc.nextLine();
-//
-//        System.out.print("Entrer le nombre de chambres disponibles : ");
-//        int availableRooms = sc.nextInt();
-//
-//        System.out.print("Entrer la note de l'hôtel : ");
-//        Double rating = sc.nextDouble();
-//        hotel = new Hotel(hotelId,name,address,availableRooms,rating);
-//        hotelRepository.save(hotel);
-//        System.out.println("Hotel cree avec succes");
+        System.out.println("\n=== Création d'un nouvel Hôtel ===");
+
+        System.out.print("Entrer l'ID de l'hôtel : ");
+        String hotelId = sc.nextLine();
+
+        System.out.print("Entrer le nom de l'hôtel : ");
+        String name = sc.nextLine();
+
+        System.out.print("Entrer l'adresse de l'hôtel : ");
+        String address = sc.nextLine();
+
+        System.out.print("Entrer le nombre de chambres disponibles : ");
+        int availableRooms = sc.nextInt();
+
+        System.out.print("Entrer la note de l'hôtel : ");
+        Double rating = sc.nextDouble();
+        hotel = new Hotel(hotelId,name,address,availableRooms,rating);
+        hotelRepository.save(hotel);
+        System.out.println("Hotel cree avec succes");
     }
 }

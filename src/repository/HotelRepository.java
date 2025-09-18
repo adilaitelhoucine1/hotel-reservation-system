@@ -30,4 +30,5 @@ public class HotelRepository {
         Hotels.remove(hotel);
     }
 
+
 }

@@ -1,6 +1,8 @@
 package src;
 
 import src.domain.Client;
+import src.repository.HotelRepository;
+import src.repository.ReservationRepository;
 import src.service.AuthService;
 import src.service.HotelService;
 import src.service.ReservationService;
@@ -11,9 +13,12 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
+        HotelRepository hotelRepository = new HotelRepository();
+        ReservationRepository reservationRepository = new ReservationRepository();
+
         AuthService authService = new AuthService();
-        HotelService hotelService = new HotelService();
-        ReservationService reservationService = new ReservationService();
+        HotelService hotelService = new HotelService(hotelRepository);
+        ReservationService reservationService = new ReservationService(hotelRepository, reservationRepository);
         authService.addAdminAccount("admin@java", "admin123");
         boolean running = true;
 
@@ -45,9 +50,8 @@ public class Main {
                 // Logged-in menu
                 System.out.println("Logged in as: " + currentUser.getFullName());
 
-                // Admin Menu
+
                 if (currentUser.getEmail().equals("admin@java") && currentUser.getPassword().equals("admin123")) {
-                    //System.out.println("teeeeeeeeeeeeeeeeee");
 
                     // Admin menu
                     System.out.println("1. Create Hotel");
@@ -80,7 +84,7 @@ public class Main {
 
                     switch (choice) {
                         case 1 -> hotelService.listHotels();
-//                        case 2 -> reservationService.bookRoom(sc, currentUser);
+                        case 2 -> reservationService.bookRoom(sc, currentUser);
 //                        case 3 -> reservationService.cancelReservation(sc, currentUser);
 //                        case 4 -> reservationService.showHistory(currentUser);
                         case 5 -> authService.logout();
