@@ -1,5 +1,5 @@
 package src;
-
+import  java.util.*;
 import src.domain.Client;
 import src.service.AuthService;
 import src.service.HotelService;
@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Initialize services
         AuthService authService = new AuthService();
         HotelService hotelService = new HotelService();
         ReservationService reservationService = new ReservationService();
@@ -34,7 +33,7 @@ public class Main {
 
                 switch (choice) {
                     case 1 -> authService.register(sc);
-                    case 2 -> authService.login(sc);
+//                    case 2 -> authService.login(sc);
                     case 0 -> running = false;
                     default -> System.out.println("❌ Invalid choice!");
                 }
@@ -66,7 +65,6 @@ public class Main {
             }
         }
 
-        System.out.println("👋 Goodbye!");
         sc.close();
     }
 }
