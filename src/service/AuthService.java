@@ -17,7 +17,7 @@ public class AuthService {
         System.out.println("Entrer votre mot de passe");
         String password = sc.nextLine();
         loggedInClient = new Client(userName, email, password);
-        if (clientRepository.findByEmail(loggedInClient) != null) {
+        if (clientRepository.findByEmail(loggedInClient.getEmail()) != null) {
             System.out.println("Cet email deja existe");
             return;
         } else {
@@ -31,8 +31,7 @@ public class AuthService {
         String email = sc.nextLine();
         System.out.println("Entrer Votre Mots de passe");
         String password = sc.nextLine();
-        Client clientTemp = new Client("", email, password);
-        Client foundClient = clientRepository.findByEmail(clientTemp);
+        Client foundClient = clientRepository.findByEmail(email);
         if (foundClient == null) {
             System.out.println("Aucun utilisateur avec cet email");
         } else {
@@ -51,6 +50,13 @@ public  void logout(){
 }
     public Client getLoggedInClient() {
         return loggedInClient;
+    }
+
+
+
+    public void addAdminAccount(String email, String password) {
+        Client admin = new Client("Admin", email, password);
+        clientRepository.save(admin);
     }
 
 }

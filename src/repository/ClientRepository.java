@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientRepository {
-    private List<Client> Clients = new ArrayList<Client>();
+    private static List<Client> Clients = new ArrayList<Client>();
 
 
     public void save(Client client) {
         Clients.add(client);
     }
 
-    public Client findByEmail(Client client) {
+    public Client findByEmail(String email) {
         for (Client c : Clients) {
-            if (c.getEmail().equalsIgnoreCase(client.getEmail())) {
+            if (c.getEmail().equalsIgnoreCase(email)) {
                 return c;
             }
         }

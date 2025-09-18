@@ -9,7 +9,7 @@ public class HotelRepository {
     List<Hotel> Hotels = new ArrayList<Hotel>();
 
 
-    public void Save(Hotel hotel) {
+    public void save(Hotel hotel) {
         Hotels.add(hotel);
     }
 
