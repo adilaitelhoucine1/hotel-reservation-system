@@ -26,7 +26,31 @@ public class AuthService {
 
     }
 
+    public void login(Scanner sc) {
+        System.out.println("Entrer Votre email");
+        String email = sc.nextLine();
+        System.out.println("Entrer Votre Mots de passe");
+        String password = sc.nextLine();
+        Client clientTemp = new Client("", email, password);
+        Client foundClient = clientRepository.findByEmail(clientTemp);
+        if (foundClient == null) {
+            System.out.println("Aucun utilisateur avec cet email");
+        } else {
+            if (!foundClient.getPassword().equals(password)) {
+                System.out.println("Le mot de passe in incorrect");
+            } else {
+                loggedInClient = foundClient;
+                System.out.println("Bienvenue " + foundClient.getFullName());
+            }
+        }
+
+    }
+
+public  void logout(){
+        loggedInClient=null;
+}
     public Client getLoggedInClient() {
         return loggedInClient;
     }
+
 }

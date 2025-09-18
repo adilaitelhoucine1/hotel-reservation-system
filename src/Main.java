@@ -23,24 +23,22 @@ public class Main {
             System.out.println("\n=== Hotel Reservation System ===");
 
             if (currentUser == null) {
-                // Guest menu
                 System.out.println("1. Register");
                 System.out.println("2. Login");
                 System.out.println("0. Exit");
                 System.out.print("Choice: ");
                 int choice = sc.nextInt();
-                sc.nextLine(); // consume newline
+                sc.nextLine();
 
                 switch (choice) {
                     case 1 -> authService.register(sc);
-//                    case 2 -> authService.login(sc);
+                    case 2 -> authService.login(sc);
                     case 0 -> running = false;
                     default -> System.out.println("❌ Invalid choice!");
                 }
 
             } else {
-                // Logged-in menu
-                System.out.println("Logged in as: " +/* currentUser.getFullName()*/ "adil");
+                System.out.println("Logged in as: " + currentUser.getFullName() );
                 System.out.println("1. List Hotels");
                 System.out.println("2. Create Hotel");
                 System.out.println("3. Book Room");
@@ -52,16 +50,16 @@ public class Main {
                 int choice = sc.nextInt();
                 sc.nextLine();
 
-//                switch (choice) {
+               switch (choice) {
 //                    case 1 -> hotelService.listHotels();
 //                    case 2 -> hotelService.createHotel(sc);
 //                    case 3 -> reservationService.bookRoom(sc, currentUser);
 //                    case 4 -> reservationService.cancelReservation(sc, currentUser);
 //                    case 5 -> reservationService.showHistory(currentUser);
-//                    case 6 -> authService.logout();
-//                    case 0 -> running = false;
-//                    default -> System.out.println("❌ Invalid choice!");
-//                }
+                   case 6 -> authService.logout();
+                   case 0 -> running = false;
+                    default -> System.out.println("❌ Invalid choice!");
+               }
             }
         }
 
