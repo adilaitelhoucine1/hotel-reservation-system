@@ -5,7 +5,7 @@ import src.domain.Hotel;
 import src.domain.Reservation;
 import src.repository.HotelRepository;
 import src.repository.ReservationRepository;
-
+import  java.util.UUID;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,18 +39,37 @@ public class ReservationService {
 
     }
 
-   public void  cancelReservation(Scanner sc, Client currentUser){
-       System.out.println("Entrer Id de reservaion ");
-       String reservationId=sc.nextLine();
-       reservation=reservationRepository.getReservation(reservationId);
-       if(!reservation.getClientId().equals(currentUser.getID())){
-           System.out.println("c est pas votre reservation");
-       }else{
-           reservationRepository.remove(reservation);
-           hotel =hotelRepository.FindById(reservation.getHotelId());
-           hotel.setavAilableRooms(hotel.getAvailableRooms()+1);
-       }
+    public void cancelReservation(Scanner sc, Client currentUser) {
+        System.out.println("Entrer Id de réservation ");
+        String reservationIdInput = sc.nextLine().trim(); // remove extra spaces
+
+        // Convert input string to UUID
+        UUID reservationUUID;
+        try {
+            reservationUUID = UUID.fromString(reservationIdInput);
+        } catch (IllegalArgumentException e) {
+            System.out.println("ID invalide !");
+            return;
+        }
+
+        // Find reservation
+        reservation = reservationRepository.getReservation(reservationUUID);
+
+        if (reservation == null) {
+            System.out.println("Aucune réservation trouvée avec cet ID.");
+            return;
+        }
+
+        if (!reservation.getClientId().equals(currentUser.getID())) {
+            System.out.println("Ce n'est pas votre réservation");
+        } else {
+            reservationRepository.remove(reservation);
+            hotel = hotelRepository.FindById(reservation.getHotelId());
+            hotel.setavAilableRooms(hotel.getAvailableRooms() + 1);
+            System.out.println("Réservation annulée avec succès !");
+        }
     }
+
 
     public void showHistory(Client currentUser) {
         List<Reservation> reservations = reservationRepository.getAllreservations();

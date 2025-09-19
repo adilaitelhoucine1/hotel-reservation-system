@@ -36,12 +36,15 @@ public class ReservationRepository {
         return Reservations;
     }
 
-    public Reservation getReservation(String  reservationid){
-        for(Reservation reservation : Reservations){
-            if(reservation.getId().equals(reservationid)){
-                return reservation;
+    public Reservation getReservation(UUID reservationId){
+       // remove spaces/newlines
+        for (Reservation r : Reservations) {
+            if (r.getId().equals(reservationId)) { // also trim stored IDs just in case
+                return r;
             }
         }
         return null;
     }
- }
+
+
+}
