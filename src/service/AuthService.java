@@ -16,6 +16,10 @@ public class AuthService {
         String email = sc.nextLine();
         System.out.println("Entrer votre mot de passe");
         String password = sc.nextLine();
+        if (!isValidEmail(email)) {
+            System.out.println(" Format d'email invalide. Exemple: Youcode@java.com");
+            return;
+        }
         loggedInClient = new Client(userName, email, password);
         if (clientRepository.findByEmail(loggedInClient.getEmail()) != null) {
             System.out.println("Cet email deja existe");
@@ -59,4 +63,9 @@ public  void logout(){
         clientRepository.save(admin);
     }
 
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        return email.matches(emailRegex);
+    }
 }
